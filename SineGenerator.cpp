@@ -1,5 +1,5 @@
-﻿#define STEP_COUNT 500         //  разложение 320 * 500 * 2 = 16МГц / 50Гц.
-#define PULSE_PER_STEP (160000/STEP_COUNT)
+﻿#define STEP_COUNT 250         //  разложение 320 * 500 * 2 = 16МГц / 50Гц.
+#define PULSE_PER_STEP (160000/STEP_COUNT) * 0.9
 unsigned int arr_pwm[STEP_COUNT];
 #define _USE_MATH_DEFINES
 
@@ -23,7 +23,10 @@ int main()
 
     f << "#pragma once" << std::endl;
     f << std::endl;
-    f << "const uint16_t arr_pwm[STEP_COUNT] = " << std::endl;
+    f << "#define STEP_COUNT  " << STEP_COUNT << std::endl;
+    f << "#define PULSE_PER_STEP " << PULSE_PER_STEP << std::endl;
+    f << std::endl;
+    f << "const unsigned int arr_pwm[STEP_COUNT] = " << std::endl;
     f << "{" << std::endl;
     for (int i = 0; i < STEP_COUNT; )
     {
