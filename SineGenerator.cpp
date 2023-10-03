@@ -1,5 +1,6 @@
 ﻿#define STEP_COUNT 250         //  разложение 320 * 500 * 2 = 16МГц / 50Гц.
-#define PULSE_PER_STEP (160000/STEP_COUNT) * 0.9
+#define PULSE_PER_STEP (160000/STEP_COUNT)
+#define SCALE 0.9
 unsigned int arr_pwm[STEP_COUNT];
 #define _USE_MATH_DEFINES
 
@@ -15,11 +16,11 @@ int main()
 
     for (int i = 0; i < STEP_COUNT; ++i)
     {
-        arr_pwm[i] = lroundl(sin(angle) * PULSE_PER_STEP);
+        arr_pwm[i] = lroundl(sin(angle) * PULSE_PER_STEP * SCALE);
         angle += d;
     }
 
-    std::ofstream f("sin.h");
+    std::ofstream f("..\\pvs1\\src\\sin.h");
 
     f << "#pragma once" << std::endl;
     f << std::endl;
